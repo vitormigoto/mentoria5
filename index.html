@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentoria 5</title>
+    <style>
+        .painel{
+            border:1px solid black;
+            border-radius: 5px;
+            width:200px;
+            padding:10px;        
+            margin:5px;    
+        }
+
+        input{
+            margin:5px 0px;
+        }
+
+        label{
+            font-weight: bold;
+            font-family: Arial;
+        }
+        h3{
+            font-weight: bold;
+            font-family: Arial;
+        }
+    </style>
+    <script>
+        const listaNumeros = [] 
+
+        function add_numero(){                        
+            let num = document.getElementById("num").value
+            if(validaCampos(num)){
+                listaNumeros.push(`<li> ${num} </li>`)
+                document.getElementById("lista").innerHTML = listaNumeros.join('')
+                limpaNumero()
+            }else{
+                alert("Você precisa digitar um valor")
+            }
+            document.getElementById("num").focus()
+            somaLista()
+            mediaLista()
+        }       
+        
+        function validaCampos(numero){
+            if(numero!=""){
+                return numero
+            }
+            else{
+                return false
+            }
+        }
+
+        function limpaNumero(){ 
+            document.getElementById("num").value = ""
+        }
+
+        function somaLista(){ 
+            let resultado = 0
+            listaNumeros.forEach(valor => {
+                resultado = resultado + Number(valor.split(" ")[1])
+            });
+            document.getElementById("soma").innerHTML = resultado
+            return resultado
+        }
+
+        function mediaLista(){ 
+            let resultado = 0
+            let soma = somaLista()            
+            resultado = Number(soma) / Number(listaNumeros.length)
+            document.getElementById("media").innerHTML = resultado
+        }
+                
+    </script>    
+</head>
+<body>
+    <div class="painel">
+        <label>Adicione um numero:</label>
+        <input id="num" type="number">
+        <button onclick="add_numero()">Adicionar</button>
+    </div>
+
+    <div class="painel">
+        <label>Lista de Números</label>
+        <ul id="lista">
+        </ul>
+    </div>
+
+    <div class="painel">
+        <label>Soma</label>
+        <h3 id="soma"></h3>
+    </div>
+
+    <div class="painel">
+        <label>Média</label>
+        <h3 id="media"></h3>
+    </div>
+    
+</body>
+</html>
